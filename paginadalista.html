@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Agenda de Contatos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <div id="title">
+        <h1><span>AGENDA</span> </h1>
+        <h1>Conexões Contatos</h1>
+    </div>
+    
+</header>
+
+<main>
+    <!-- Formulário de cadastro -->
+    <aside>
+        <h2>Adicione um contato</h2>
+        <form id="formContato">
+            <input type="text" id="nome" placeholder="Nome" required>
+            <input type="tel" id="telefone" placeholder="Telefone" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <textarea id="observacoes" placeholder="Observações"></textarea>
+            <button type="submit">Adicionar Contato</button>
+        </form>
+    </aside>
+
+    <!-- Lista de contatos -->
+    <article>
+        <h2>Lista de Contatos</h2>
+        <ul id="listaContatos"></ul>
+    </article>
+</main>
+
+<script>
+// -------- Funções do CRUD --------
+function carregarContatos() {
+    return JSON.parse(localStorage.getItem('contatos')) || [];
+}
+
+function salvarContatos(lista) {
+    localStorage.setItem('contatos', JSON.stringify(lista));
+}
+
+const listaUl = document.getElementById('listaContatos');
+function mostrarLista() {
+    const lista = carregarContatos();
+    listaUl.innerHTML = '';
+
+    lista.forEach((c, i) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <strong>${c.nome}</strong><br>
+            Telefone: ${c.telefone}<br>
+            Email: ${c.email}<br>
+            Observações: ${c.observacoes}<br>
+            <button data-index="${i}" class="editar">Editar</button>
+            <button data-index="${i}" class="excluir">Excluir</button>
+        `;
+        listaUl.appendChild(li);
+    });
+
+    document.querySelectorAll('.excluir').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const index = this.getAttribute('data-index');
+            const lista = carregarContatos();
+            lista.splice(index, 1);
+            salvarContatos(lista);
+            mostrarLista();
+        });
+    });
+
+    document.querySelectorAll('.editar').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const index = this.getAttribute('data-index');
+            const lista = carregarContatos();
+            const c = lista[index];
+
+            const nome = prompt("Editar nome:", c.nome);
+            if (nome) c.nome = nome;
+
+            const telefone = prompt("Editar telefone:", c.telefone);
+            if (telefone) c.telefone = telefone;
+
+            const email = prompt("Editar email:", c.email);
+            if (email) c.email = email;
+
+            const obs = prompt("Editar observações:", c.observacoes);
+            if (obs) c.observacoes = obs;
+
+            lista[index] = c;
+            salvarContatos(lista);
+            mostrarLista();
+        });
+    });
+}
+
+mostrarLista();
+
+const form = document.getElementById('formContato');
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const novoContato = {
+        nome: document.getElementById('nome').value,
+        telefone: document.getElementById('telefone').value,
+        email: document.getElementById('email').value,
+        observacoes: document.getElementById('observacoes').value
+    };
+
+    const lista = carregarContatos();
+    lista.push(novoContato);
+    salvarContatos(lista);
+
+    form.reset();
+    mostrarLista();
+});
+</script>
+</body>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Agenda de Contatos</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+    <style>
+    article h2 {
+    font-size: 32px;
+    color: #b23a62; /* rosa do título */
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+article p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    text-align: justify;
+    color: #ffffff; /* texto branco */
+}
+
+article ul {
+    margin-left: 20px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 1.5;
+    flex: 1;
+    min-width: 400px;
+    max-width: 700px;
+    background-color: #d86b8c; /* rosa do artigo */
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px 2px #f5bdd0; /* sombra rosa suave */
+    color: #ffffff;
+}
+
+article ul li::before {
+    content: "✔ ";
+    color: #e27898; /* rosado suave igual ao botão */
+}
+
+aside h2 {
+    font-size: 28px;
+    color: #ffffff; /* branco igual ao modelo */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+aside input {
+    font-size: 16px;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    background-color: #c4557b; /* rosa escuro igual ao outro */
+    color: #ffffff;
+}
+
+aside button {
+    font-size: 18px;
+    padding: 15px;
+    margin-top: 15px;
+    width: 100%;
+    border-radius: 12px;
+    background-color: #e27898; /* rosa do botão */
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+    </style>
+</head>
+<body>
+<header>
+    <div id="title">
+        <h1><span>AGENDA</span></h1>
+        <h1>Conexões Contatos</h1>
+    </div>
+</header>
+
+<main>
+    <!-- Formulário de cadastro -->
+    <aside>
+        <h2>Cadastre-se</h2>
+        <form id="formCadastro">
+            <input type="text" id="nome" placeholder="Nome" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="senha" placeholder="Senha" required>
+            <button type="submit">Cadastrar</button>
+
+             <p style="margin-top:15px; text-align:center; font-size:14px;">
+            Já possui conta? <a href="login.html" style="color:#ecc7dd; text-decoration:none;">Logar-se</a>
+        </p>
+        </form>
+    </aside>
+
+    <!-- Informações sobre o site -->
+    <article>
+        <h2>Sobre a Agenda de Contatos</h2>
+        <p>
+            Bem-vindo(a) à <strong>Agenda de Contatos</strong>! Aqui você poderá organizar todos os seus contatos de forma prática e segura.
+        </p>
+        <ul>
+            <li>Adicione contatos com Nome, E-mail e Telefone.</li>
+            <li>Todos os dados são salvos localmente no seu navegador.</li>
+            <li>Facilite a gestão de seus contatos de maneira simples e rápida.</li>
+        </ul>
+        <p>Após cadastrar seus dados, você será redirecionado(a) para a página principal da agenda.</p>
+    </article>
+</main>
+
+<script>
+    const form = document.getElementById('formCadastro');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const nome = document.getElementById('nome').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const senha = document.getElementById('senha').value.trim();
+
+        if (!nome || !email || !senha) {
+            alert("Por favor, preencha todos os campos!");
+            return;
+        }
+
+        // Aqui você pode salvar dados no localStorage ou enviar para backend
+        alert(`Cadastro realizado com sucesso! Bem-vindo(a), ${nome}.`);
+        window.location.href = "paginadalista.html"; // página principal da agenda
+    });
+</script>
+</body>
+</html>

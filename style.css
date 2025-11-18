@@ -1,48 +1,170 @@
-*{
-    padding: 0;
+/* RESET BÁSICO */
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-main{
- padding: 10px;
- height: 80vh;
-}
-
-form{
-    margin: 10px;
-    border: 1px solid gray;
-    border-radius: 10px;
+body {
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #e9d0d0; /* FUNDO BRANCO */
+    color: #f1f1f1;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
-    box-shadow: 1px 1px gray;
+}
+
+/* HEADER */
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+    margin-bottom: 40px;
 }
 
-input{
+header #title h1 {
+    font-weight: 400;
+    font-size: 36px;
     margin-bottom: 5px;
-    font-size: 16px;
+    color: #b23a62; /* rosa */
+}
+
+header #title span {
+    color: #b23a62; /* rosa */
+}
+
+/* MAIN - LAYOUT FLEX */
+main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+}
+
+/* ASIDE - FORMULÁRIO */
+aside {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+    background-color: #d46a8a; /* rosa */
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px 2px #e7a2b9;
+}
+
+aside h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+aside input,
+aside textarea,
+aside button {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    font-size: 15px;
+}
+
+/* CAMPOS DE TEXTO */
+aside input,
+aside textarea {
+    background-color: #c4557b; /* rosa mais escuro */
+    color: #ffffff;
+}
+
+aside textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+/* BOTÃO */
+aside button {
+    background-color: #e27898; /* rosa */
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+aside button:hover {
+    background-color: #f293b1; /* rosa */
+    box-shadow: 0 0 15px 3px #ffdde6;
+}
+
+/* ARTICLE - LISTA DE CONTATOS */
+article {
+    flex: 2;
+    min-width: 300px;
+    max-width: 700px;
+}
+
+article h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #b23a62; /* rosa */
+}
+
+#listaContatos {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#listaContatos li {
+    background-color: #d86b8c; /* rosa */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px 1px #f5bdd0;
+    position: relative;
+    color: #fff;
+}
+
+/* BOTÕES DE EDITAR E EXCLUIR */
+#listaContatos li button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    padding: 6px 12px;
+    font-size: 13px;
     border-radius: 10px;
-}
-input[type="text"]{
-    padding: 5px;
-    outline: none;
-    width: 90%;
-}
-
-input[type="tel"]{
-    padding: 5px;
-    outline: none;
-    width: 90%;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    color: #ffffff;
 }
 
-input[type="email"]{
-    padding: 5px;
-    outline: none;
-    width: 90%;
+#listaContatos li button.editar {
+    background-color: #c9587a; /* rosa */
+    right: 90px;
 }
 
-input[type="submit"]{
-    padding: 5px 10px;
-    margin-bottom: 5px;
-    background-color: blueviolet;
-    width: 50%;
+#listaContatos li button.editar:hover {
+    background-color: #a84463;
+}
+
+#listaContatos li button.excluir {
+    background-color: #e06488; /* rosa */
+}
+
+#listaContatos li button.excluir:hover {
+    background-color: #c65071;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 900px) {
+    main {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    aside, article {
+        max-width: 90%;
+    }
 }
